@@ -1,101 +1,103 @@
+"use client";
+import { UserButton } from "@clerk/nextjs";
+import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
+// import video from "../Video/10715-226624864.mp4"
+// import video from "../public/Video/10715-226624864.mp4";
 
-export default function Home() {
+function HomePage() {
+  const path = usePathname();
+  useEffect(() => {
+    console.log(path);
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div
+      style={{
+        fontFamily: "Arial, sans-serif",
+        padding: "0 20px",
+        backgroundColor: "#f5f5f5",
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        backgroundSize: "contain",
+        backgroundRepeat: "repeat",
+        minHeight: "100vh",
+      }}
+    >
+      video
+      <header
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "20px 0",
+        }}
+      >
+        <Image
+          src="/logo.svg"
+          width={100}
+          height={50}
+          alt="Logo"
+          style={{ cursor: "pointer" }}
+        />
+      </header>
+
+      <main style={{ textAlign: "center", marginTop: "50px" }}>
+        <h1
+          style={{
+            fontSize: "3rem", // Adjust size based on requirement
+            fontWeight: "900", // Extra bold
+            color: "#000", // Black color
+            // letterSpacing: "-0.5px", // Slight negative spacing for tighter look
+            fontFamily: "'Inter', sans-serif", // Use "Inter" font or similar sans-serif
+            marginBottom: "20px",
+          }}
+        >
+          Your Personal AI Interview Coach
+        </h1>
+        <p
+          style={{
+            fontSize: "1.25rem",
+            color: "#555",
+            maxWidth: "600px",
+            margin: "0 auto 30px",
+            lineHeight: "1.8",
+            // fontStyle: "italic",
+          }}
+        >
+          Double your chances of landing that job offer with our AI-powered
+          interview coach. (InterVU)
+        </p>
+
+        <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+          <Link href="/dashboard">
+            <button
+              style={{
+                padding: "15px 25px",
+                fontSize: "16px",
+                background: "#007acc",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                fontWeight: "bold",
+                cursor: "pointer",
+                transition: "transform 0.3s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.1)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
+            >
+              Get Started →
+            </button>
+          </Link>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
+
+export default HomePage;
