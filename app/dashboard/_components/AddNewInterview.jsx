@@ -13,7 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { chatSession } from "@/utils/GeminiAIModal";
 import { LoaderCircle } from "lucide-react";
-import { MockInterVU } from "@/utils/schema";
+import { db } from "@/utils/db";
+import { mockInterview } from "@/utils/schema";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment";
@@ -22,10 +23,10 @@ function AddNewInterview() {
   const [openDialog, setopenDialog] = useState(false);
   const [jobPosition, setJobPosition] = useState();
   const [jobDesc, setJobDesc] = useState();
-  const [jobExperience, setJobExperience] = useState("");
+  const [jobExperience, setJobExperience] = useState();
   const [loading, setLoading] = useState(false);
-  const [jsonResponse,setjsonResponse]=useState([]);
-  const {user}=useUser();
+  const [jsonResponse, setjsonResponse] = useState([]);
+  const { user } = useUser();
 
   const onSubmit = async (e) => {
     setLoading(true);
@@ -44,29 +45,31 @@ function AddNewInterview() {
       " interview questions along with answers in JSON format ";
 
     const result = await chatSession.sendMessage(InputPrompt);
-    const MockJsonResp = result.response
-      .text()
+    const MockJsonResp = (result.response
+      .text())
       .replace("```json", "")
       .replace("```", "");
     console.log(JSON.parse(MockJsonResp));
     setjsonResponse(MockJsonResp);
-    if(MockJsonResp){
-    const resp=await db.insert(MockInterVU)
-    .values({
-      mockId: uuidv4(),
-      jsonMockResp: MockJsonResp,
-      jobPosition: jobPosition,
-      jobDesc: jobDesc,
-      jobExperience: jobExperience,
-      createdBy: user?.primaryEmailAddress?.emailAddress,
-      createdAt:moment().format("DD-MM-YYYY")
-    }).returning({mockId:MockInterVU.mockId});
-    console.log("Inserted ID:",resp);
-  }
-    else{
-console.log("ERROR");
+    
+    if (MockJsonResp) {
+      const resp = await db
+        .insert(mockInterview)
+        .values({
+          mockId: uuidv4(),
+          jsonMockResp: MockJsonResp,
+          jobPosition: jobPosition,
+          jobDesc: jobDesc,
+          jobExperience: jobExperience,
+          createdBy: user?.primaryEmailAddress?.emailAddress,
+          createdAt: moment().format("DD-MM-yyyy"),
+        })
+        .returning({ mockId: mockInterview.mockId });
+      console.log("Inserted ID:", resp);
+    } else {
+      console.log("ERROR");
     }
-      setLoading(false);
+    setLoading(false);
   };
   return (
     <div>
@@ -131,14 +134,14 @@ console.log("ERROR");
                     type="submit"
                     disabled={loading}
                   >
-                    {loading ? (
-                      <>
-                        <LoaderCircle className="animate-spin" />
-                        'Generating from AI'
-                      </>
-                    ) : (
-                      "Start Interview"
-                    )}
+                    {loading
+                      ? 
+                          <>
+                            <LoaderCircle className="animate-spin" />
+                            'Generating from AI'
+                          </>
+                        : "Start Interview"
+                    }
                   </Button>
                 </div>
               </form>

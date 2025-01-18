@@ -25,7 +25,7 @@ function HomePage() {
         minHeight: "100vh",
       }}
     >
-      video
+      
       <header
         style={{
           display: "flex",
