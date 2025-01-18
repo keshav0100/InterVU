@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -18,6 +18,7 @@ import { mockInterview } from "@/utils/schema";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment";
+import { useRouter } from "next/navigation";
 
 function AddNewInterview() {
   const [openDialog, setopenDialog] = useState(false);
@@ -26,6 +27,7 @@ function AddNewInterview() {
   const [jobExperience, setJobExperience] = useState();
   const [loading, setLoading] = useState(false);
   const [jsonResponse, setjsonResponse] = useState([]);
+  const router = useRouter();
   const { user } = useUser();
 
   const onSubmit = async (e) => {
@@ -45,13 +47,13 @@ function AddNewInterview() {
       " interview questions along with answers in JSON format ";
 
     const result = await chatSession.sendMessage(InputPrompt);
-    const MockJsonResp = (result.response
-      .text())
+    const MockJsonResp = result.response
+      .text()
       .replace("```json", "")
       .replace("```", "");
     console.log(JSON.parse(MockJsonResp));
     setjsonResponse(MockJsonResp);
-    
+
     if (MockJsonResp) {
       const resp = await db
         .insert(mockInterview)
@@ -66,6 +68,10 @@ function AddNewInterview() {
         })
         .returning({ mockId: mockInterview.mockId });
       console.log("Inserted ID:", resp);
+      if (resp) {
+        setopenDialog(false);
+        router.push("/dashboard/interview/" + resp[0]?.mockId);
+      }
     } else {
       console.log("ERROR");
     }
@@ -134,14 +140,14 @@ function AddNewInterview() {
                     type="submit"
                     disabled={loading}
                   >
-                    {loading
-                      ? 
-                          <>
-                            <LoaderCircle className="animate-spin" />
-                            'Generating from AI'
-                          </>
-                        : "Start Interview"
-                    }
+                    {loading ? (
+                      <>
+                        <LoaderCircle className="animate-spin" />
+                        'Generating from AI'
+                      </>
+                    ) : (
+                      "Start Interview"
+                    )}
                   </Button>
                 </div>
               </form>
