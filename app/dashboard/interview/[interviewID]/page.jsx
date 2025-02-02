@@ -78,7 +78,9 @@ function Interview({ params }) {
       </div>
       <div className="flex justify-end items-end">
         <Link href={"/dashboard/interview/" + params.interviewID + "/start"}>
-          <Button className="mt-3">Start Interview</Button>
+          <Button className="bg-black text-white hover:bg-gray-600 transition-transform transform hover:scale-105">
+            Start Interview
+          </Button>
         </Link>
       </div>
     </div>

@@ -284,7 +284,7 @@ function RecordAns({ mockInterviewQuestions, activeQuestion, interviewData }) {
           </h2>
         )}
       </Button>
-      <Button onClick={() => console.log(userAnswer)}>Show Answer</Button>
+
     </div>
   );
 }

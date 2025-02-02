@@ -45,12 +45,18 @@ function Start({ params }) {
       </div>
       <div className="flex justify-end gap-6">
         {activeQuestion > 0 && (
-          <Button onClick={() => setActiveQuestion(activeQuestion - 1)}>
+          <Button
+            onClick={() => setActiveQuestion(activeQuestion - 1)}
+            className=" font-bold bg-black text-white hover:bg-gray-600 transition-transform transform hover:scale-105 px-6 py-3 rounded-lg"
+          >
             Previous Question
           </Button>
         )}
         {activeQuestion != mockInterviewQuestions?.length - 1 && (
-          <Button onClick={() => setActiveQuestion(activeQuestion + 1)}>
+          <Button
+            onClick={() => setActiveQuestion(activeQuestion + 1)}
+            className=" font-bold bg-black text-white hover:bg-gray-600 transition-transform transform hover:scale-105 px-6 py-3 rounded-lg"
+          >
             Next Question
           </Button>
         )}
@@ -58,7 +64,9 @@ function Start({ params }) {
           <Link
             href={"/dashboard/interview/" + interviewData?.mockId + "/feedback"}
           >
-            <Button>End Interview</Button>
+            <Button className=" font-bold bg-black text-white hover:bg-gray-600 transition-transform transform hover:scale-105 px-6 py-3 rounded-lg">
+              End Interview
+            </Button>
           </Link>
         )}
       </div>

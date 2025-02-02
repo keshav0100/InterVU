@@ -139,6 +139,7 @@ function AddNewInterview() {
                     style={{ fontWeight: 900 }}
                     type="submit"
                     disabled={loading}
+                    className="bg-black text-white hover:bg-gray-500 transition-transform transform hover:scale-105"
                   >
                     {loading ? (
                       <>
