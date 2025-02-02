@@ -19,7 +19,7 @@ function Feedback({ params }) {
     const result = await db
       .select()
       .from(UserAnswer)
-      .where(eq(UserAnswer.mockId, params.interviewID))
+      .where(eq(UserAnswer.mockIdRef, params.interviewID))
       .orderBy(UserAnswer.id);
 
     console.log(result);
