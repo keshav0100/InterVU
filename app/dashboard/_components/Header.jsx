@@ -44,13 +44,6 @@ function Header() {
         >
           Upgrade
         </li>
-        <li
-          onClick={() => router.push("/dashboard/how")}
-          className={`hover:text-primary hover:font-bold transition-all cursor-pointer
-          ${path == "/dashboard/how" && "text-primary font-bold"}`}
-        >
-          How it works?
-        </li>
       </ul>
       <UserButton />
     </div>

@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #fff;
+  background: #111;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  backdrop-filter: blur(1px);
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 100px;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+  text-align: center;
+  pointer-events: none;
+}
+
+.title {
+  font-size: 3.4em;
+  color: white;
+}
+
+.title span {
+  color: #00bfff;
+}
+
+.subtitle {
+  font-size: 1.2em;
+  color: #bbb;
+}
+
+.buttonContainer {
+  margin-top: 20px;
+}
+
+.button {
+  padding: 15px 25px;
+  font-size: 16px;
+  background: #007acc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.1);
+}
+
+/* Background Animation */
+.bgAnimation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  background: #1d1d1d;
+  filter: saturate(2);
+  overflow: hidden;
+}
+
+.colorBox {
+  z-index: 2;
+  filter: brightness(1.1);
+  transition: 2s ease;
+  margin: 2px;
+  background: #1d1d1d;
+}
+
+.colorBox:hover {
+  background: #00bfff;
+  transition-duration: 0s;
+}
